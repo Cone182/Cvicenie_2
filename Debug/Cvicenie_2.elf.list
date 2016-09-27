@@ -166,17 +166,17 @@ int main(void)
  80001de:	f023 0320 	bic.w	r3, r3, #32
  80001e2:	b29b      	uxth	r3, r3
  80001e4:	8093      	strh	r3, [r2, #4]
-  GPIOA->PUPDR &= (0b01) << (5*2);
+  GPIOA->PUPDR |= (0b01) << (5*2);
  80001e6:	4a0c      	ldr	r2, [pc, #48]	; (8000218 <main+0x60>)
  80001e8:	4b0b      	ldr	r3, [pc, #44]	; (8000218 <main+0x60>)
  80001ea:	68db      	ldr	r3, [r3, #12]
- 80001ec:	f403 6380 	and.w	r3, r3, #1024	; 0x400
+ 80001ec:	f443 6380 	orr.w	r3, r3, #1024	; 0x400
  80001f0:	60d3      	str	r3, [r2, #12]
-  GPIOA->OSPEEDR &= (0b11) << (5*2);
+  GPIOA->OSPEEDR |= (0b11) << (5*2);
  80001f2:	4a09      	ldr	r2, [pc, #36]	; (8000218 <main+0x60>)
  80001f4:	4b08      	ldr	r3, [pc, #32]	; (8000218 <main+0x60>)
  80001f6:	689b      	ldr	r3, [r3, #8]
- 80001f8:	f403 6340 	and.w	r3, r3, #3072	; 0xc00
+ 80001f8:	f443 6340 	orr.w	r3, r3, #3072	; 0xc00
  80001fc:	6093      	str	r3, [r2, #8]
 
   GPIOA->ODR |= 0b0000000000100000;
