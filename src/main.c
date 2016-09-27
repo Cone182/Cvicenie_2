@@ -77,11 +77,20 @@ int main(void)
   GPIOA->PUPDR |= (0b01) << (5*2);
   GPIOA->OSPEEDR |= (0b11) << (5*2);
 
-  GPIOA->ODR |= 0b0000000000100000;
+  //GPIOA->ODR |= 0b0000000000100000;
+
+  /* BSRRL a BSRRH */
+  //GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
+
 
   /* Infinite loop */
   while (1)
   {
+	  //GPIOA->ODR |= 0b0000000000100000;
+	  //GPIOA->ODR &= ~(0b0000000000100000);
+	  //GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+	  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
 	i++;
   }
   return 0;
