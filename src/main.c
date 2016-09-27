@@ -69,6 +69,15 @@ int main(void)
 
   /* TODO - Add your application code here */
 
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+
+  /* uloha 1 */
+  GPIOA->MODER |= (0b01) << (5*2);
+  GPIOA->OTYPER &= ~((uint16_t)(1<<5));
+  GPIOA->PUPDR &= (0b01) << (5*2);
+  GPIOA->OSPEEDR &= (0b11) << (5*2);
+
+  GPIOA->ODR |= 0b0000000000100000;
 
   /* Infinite loop */
   while (1)
