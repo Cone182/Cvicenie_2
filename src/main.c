@@ -81,10 +81,10 @@ int main(void)
   //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
 
   /* uloha 2 */
-  /*RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
   GPIOC->MODER |= (0b00) << (13*2);
   GPIOC->OTYPER &= ~((uint16_t)(1<<13));
-  GPIOC->PUPDR |= (0b00) << (13*2);*/
+  GPIOC->PUPDR |= (0b00) << (13*2);
   //int button;
 
   /* uloha 3 */
@@ -114,8 +114,8 @@ int main(void)
 	  //GPIOA->ODR &= ~(0b0000000000100000);
 	  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
 
-	  /* blikanie s intervalom */
-	  GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+	  /* blikanie s intervalom uloha 3 prva */
+	  /*GPIOA->BSRRL |= (uint16_t)(1<<5); //set
 	  c=1, d=1;
 	  for (c=1; c<= 1000; c++){
 		  for (d=1; d<= 1000; d++)
@@ -126,7 +126,17 @@ int main(void)
 	  for (c=1; c<= 1000; c++){
 		  for (d=1; d<= 1000; d++)
 		  {}
+	  }*/
+
+	  /* stav tlacidla na led uloha 3 druha */
+	  if ((GPIOC->IDR & 0b0010000000000000) == 0){
+		  GPIOA->BSRRL |= (uint16_t)(1<<5);
 	  }
+	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192) {
+		  GPIOA->BSRRH |= (uint16_t)(1<<5);
+	  }
+
+
   }
   return 0;
 }
