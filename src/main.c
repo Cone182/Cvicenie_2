@@ -85,7 +85,8 @@ int main(void)
   GPIOC->MODER |= (0b00) << (13*2);
   GPIOC->OTYPER &= ~((uint16_t)(1<<13));
   GPIOC->PUPDR |= (0b00) << (13*2);
-  //int button;
+  int button;
+
 
   /* uloha 3 */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
@@ -94,6 +95,8 @@ int main(void)
   GPIOA->PUPDR |= (0b01) << (5*2);
   GPIOA->OSPEEDR |= (0b11) << (5*2);
   int c,d;
+  int inc=0;
+  int temp_inc = 0;
 
 
 
@@ -129,13 +132,32 @@ int main(void)
 	  }*/
 
 	  /* stav tlacidla na led uloha 3 druha */
-	  if ((GPIOC->IDR & 0b0010000000000000) == 0){
+	  /*if ((GPIOC->IDR & 0b0010000000000000) == 0){
 		  GPIOA->BSRRL |= (uint16_t)(1<<5);
 	  }
 	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192) {
 		  GPIOA->BSRRH |= (uint16_t)(1<<5);
-	  }
+	  }*/
 
+	  /* uloha 3 tretia cast */
+	  for (int cc=1; cc<= 5; cc++)
+	  {
+		  if ((GPIOC->IDR & 0b0010000000000000) == 0) {
+			  temp_inc++;
+		  }
+	  }
+	  if (temp_inc > 0)
+	  {
+		  inc++;
+		  temp_inc = 0;
+	  }
+	  if (inc == 1)
+		  GPIOA->BSRRL |= (uint16_t)(1<<5);
+	  else
+	  {
+		  GPIOA->BSRRH |= (uint16_t)(1<<5);
+		  inc = 0;
+	  }
 
   }
   return 0;
