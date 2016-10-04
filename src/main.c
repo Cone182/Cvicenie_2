@@ -29,8 +29,6 @@ SOFTWARE.
 /* Includes */
 #include <stddef.h>
 #include "stm32l1xx.h"
-
-
 /* Private typedef */
 /* Private define  */
 /* Private macro */
@@ -48,8 +46,7 @@ SOFTWARE.
 */
 int main(void)
 {
-  int i = 0;
-
+  //int i = 0;
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
@@ -69,13 +66,13 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+  //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
   /* uloha 1 */
-  GPIOA->MODER |= (0b01) << (5*2);
+  /*GPIOA->MODER |= (0b01) << (5*2);
   GPIOA->OTYPER &= ~((uint16_t)(1<<5));
   GPIOA->PUPDR |= (0b01) << (5*2);
-  GPIOA->OSPEEDR |= (0b11) << (5*2);
+  GPIOA->OSPEEDR |= (0b11) << (5*2);*/
 
   //GPIOA->ODR |= 0b0000000000100000;
 
@@ -83,15 +80,28 @@ int main(void)
   //GPIOA->BSRRL |= (uint16_t)(1<<5); //set
   //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
 
+  /* uloha 2 */
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  GPIOC->MODER |= (0b00) << (13*2);
+  GPIOC->OTYPER &= ~((uint16_t)(1<<13));
+  GPIOC->PUPDR |= (0b00) << (13*2);
+  int button;
 
   /* Infinite loop */
   while (1)
   {
+	  /* nacitavanie s IDR */
+	  if ((GPIOC->IDR & 0b0010000000000000) == 0)
+		  button = 1;
+	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192)
+		  button = 0;
+
+	  /* zapinanie a vypinanie */
 	  //GPIOA->ODR |= 0b0000000000100000;
-	  //GPIOA->ODR &= ~(0b0000000000100000);
 	  //GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+
+	  //GPIOA->ODR &= ~(0b0000000000100000);
 	  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
-	i++;
   }
   return 0;
 }
