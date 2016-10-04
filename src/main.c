@@ -36,7 +36,6 @@ SOFTWARE.
 /* Private function prototypes */
 /* Private functions */
 
-
 /**
 **===========================================================================
 **
@@ -66,9 +65,10 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-  //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+
 
   /* uloha 1 */
+  //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
   /*GPIOA->MODER |= (0b01) << (5*2);
   GPIOA->OTYPER &= ~((uint16_t)(1<<5));
   GPIOA->PUPDR |= (0b01) << (5*2);
@@ -81,20 +81,31 @@ int main(void)
   //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
 
   /* uloha 2 */
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  /*RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
   GPIOC->MODER |= (0b00) << (13*2);
   GPIOC->OTYPER &= ~((uint16_t)(1<<13));
-  GPIOC->PUPDR |= (0b00) << (13*2);
-  int button;
+  GPIOC->PUPDR |= (0b00) << (13*2);*/
+  //int button;
+
+  /* uloha 3 */
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+  GPIOA->MODER |= (0b01) << (5*2);
+  GPIOA->OTYPER &= ~((uint16_t)(1<<5));
+  GPIOA->PUPDR |= (0b01) << (5*2);
+  GPIOA->OSPEEDR |= (0b11) << (5*2);
+  int c,d;
+
+
 
   /* Infinite loop */
   while (1)
   {
+
 	  /* nacitavanie s IDR */
-	  if ((GPIOC->IDR & 0b0010000000000000) == 0)
+	  /*if ((GPIOC->IDR & 0b0010000000000000) == 0)
 		  button = 1;
 	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192)
-		  button = 0;
+		  button = 0;*/
 
 	  /* zapinanie a vypinanie */
 	  //GPIOA->ODR |= 0b0000000000100000;
@@ -102,9 +113,24 @@ int main(void)
 
 	  //GPIOA->ODR &= ~(0b0000000000100000);
 	  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
+
+	  /* blikanie s intervalom */
+	  GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+	  c=1, d=1;
+	  for (c=1; c<= 1000; c++){
+		  for (d=1; d<= 1000; d++)
+		  {}
+	  }
+	  GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
+	  c=1, d=1;
+	  for (c=1; c<= 1000; c++){
+		  for (d=1; d<= 1000; d++)
+		  {}
+	  }
   }
   return 0;
 }
+
 
 #ifdef  USE_FULL_ASSERT
 
