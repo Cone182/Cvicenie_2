@@ -107,10 +107,10 @@ int main(void)
 	  //GPIOA->ODR ^= 0b0000000000100000;
 
 	  /* nacitavanie s IDR */
-	  /*if ((GPIOC->IDR & 0b0010000000000000) == 0)
+	  if ((GPIOC->IDR & 0b0010000000000000) == 0)
 		  button = 1;
 	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192)
-		  button = 0;*/
+		  button = 0;
 
 	  /* zapinanie a vypinanie */
 	  /*GPIOA->ODR |= 0b0000000000100000;
