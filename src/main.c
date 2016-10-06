@@ -111,11 +111,11 @@ int main(void)
 		  button = 0;*/
 
 	  /* zapinanie a vypinanie */
-	  //GPIOA->ODR |= 0b0000000000100000;
-	  //GPIOA->BSRRL |= (uint16_t)(1<<5); //set
+	  /*GPIOA->ODR |= 0b0000000000100000;
+	  GPIOA->BSRRL |= (uint16_t)(1<<5); //set
 
-	  //GPIOA->ODR &= ~(0b0000000000100000);
-	  //GPIOA->BSRRH |= (uint16_t)(1<<5); //reset
+	  GPIOA->ODR &= ~(0b0000000000100000);
+	  GPIOA->BSRRH |= (uint16_t)(1<<5);*/ //reset
 
 	  /* blikanie s intervalom uloha 3 prva */
 	  /*GPIOA->BSRRL |= (uint16_t)(1<<5); //set

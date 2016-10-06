@@ -211,7 +211,7 @@ int main(void)
 	  }*/
 
 	  /* uloha 3 tretia cast */
-	  for (int cc=1; cc<= 10; cc++)
+	  for (int cc=1; cc<= 5; cc++)
  800022a:	2301      	movs	r3, #1
  800022c:	607b      	str	r3, [r7, #4]
  800022e:	e00c      	b.n	800024a <main+0x92>
@@ -232,21 +232,21 @@ int main(void)
 	  }*/
 
 	  /* uloha 3 tretia cast */
-	  for (int cc=1; cc<= 10; cc++)
+	  for (int cc=1; cc<= 5; cc++)
  8000244:	687b      	ldr	r3, [r7, #4]
  8000246:	3301      	adds	r3, #1
  8000248:	607b      	str	r3, [r7, #4]
  800024a:	687b      	ldr	r3, [r7, #4]
- 800024c:	2b0a      	cmp	r3, #10
+ 800024c:	2b05      	cmp	r3, #5
  800024e:	ddef      	ble.n	8000230 <main+0x78>
 	  {
 		  if ((GPIOC->IDR & 0b0010000000000000) == 0) {
 			  temp_inc++;
 		  }
 	  }
-	  if (temp_inc > 2)
+	  if (temp_inc > 0)
  8000250:	68bb      	ldr	r3, [r7, #8]
- 8000252:	2b02      	cmp	r3, #2
+ 8000252:	2b00      	cmp	r3, #0
  8000254:	dd04      	ble.n	8000260 <main+0xa8>
 	  {
 		  inc++;
@@ -257,7 +257,6 @@ int main(void)
  800025c:	2300      	movs	r3, #0
  800025e:	60bb      	str	r3, [r7, #8]
 	  }
-
 	  if (inc == 1)
  8000260:	68fb      	ldr	r3, [r7, #12]
  8000262:	2b01      	cmp	r3, #1
@@ -284,10 +283,7 @@ int main(void)
 		  inc = 0;
  8000288:	2300      	movs	r3, #0
  800028a:	60fb      	str	r3, [r7, #12]
-
-
-
-
+	  }
 
   }
  800028c:	e7cd      	b.n	800022a <main+0x72>
