@@ -95,10 +95,9 @@ int main(void)
   GPIOA->PUPDR |= (0b01) << (5*2);
   GPIOA->OSPEEDR |= (0b11) << (5*2);
   int c,d;
-  int inc=0;
   int temp_inc = 0;
-
-
+  int temp_inc2 = 0;
+  int buttonState = 0;
 
   /* Infinite loop */
   while (1)
@@ -107,10 +106,10 @@ int main(void)
 	  //GPIOA->ODR ^= 0b0000000000100000;
 
 	  /* nacitavanie s IDR */
-	  if ((GPIOC->IDR & 0b0010000000000000) == 0)
+	  /*if ((GPIOC->IDR & 0b0010000000000000) == 0)
 		  button = 1;
 	  else if ((GPIOC->IDR & 0b0010000000000000) == 8192)
-		  button = 0;
+		  button = 0;*/
 
 	  /* zapinanie a vypinanie */
 	  /*GPIOA->ODR |= 0b0000000000100000;
@@ -142,25 +141,23 @@ int main(void)
 	  }*/
 
 	  /* uloha 3 tretia cast */
-	  /*for (int cc=1; cc<= 5; cc++)
-	  {
-		  if ((GPIOC->IDR & 0b0010000000000000) == 0) {
-			  temp_inc++;
+	  if ((GPIOC->IDR & 0b0010000000000000) == 0){
+		  temp_inc++;
+		  if (temp_inc > 5){
+			  temp_inc = 0;
+	  		  buttonState = 1;
 		  }
 	  }
-	  if (temp_inc > 0)
-	  {
-		  inc++;
-		  temp_inc = 0;
+	  if (buttonState ==1){
+		  if ((GPIOC->IDR & 0b0010000000000000) == 0){
+			  temp_inc2++;
+	  		  if (temp_inc2 > 5){
+	  			  GPIOA->ODR ^= 0b0000000000100000;
+	  			  temp_inc2 = 0;
+	  			  buttonState=0;
+	  		  }
+		  }
 	  }
-	  if (inc == 1)
-		  GPIOA->BSRRL |= (uint16_t)(1<<5);
-	  else
-	  {
-		  GPIOA->BSRRH |= (uint16_t)(1<<5);
-		  inc = 0;
-	  }*/
-
   }
   return 0;
 }
