@@ -103,6 +103,8 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+	  /* Uloha 1 prepinanie */
+	  //GPIOA->ODR ^= 0b0000000000100000;
 
 	  /* nacitavanie s IDR */
 	  /*if ((GPIOC->IDR & 0b0010000000000000) == 0)
@@ -140,7 +142,7 @@ int main(void)
 	  }*/
 
 	  /* uloha 3 tretia cast */
-	  for (int cc=1; cc<= 5; cc++)
+	  /*for (int cc=1; cc<= 5; cc++)
 	  {
 		  if ((GPIOC->IDR & 0b0010000000000000) == 0) {
 			  temp_inc++;
@@ -157,7 +159,7 @@ int main(void)
 	  {
 		  GPIOA->BSRRH |= (uint16_t)(1<<5);
 		  inc = 0;
-	  }
+	  }*/
 
   }
   return 0;
